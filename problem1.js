@@ -13,7 +13,7 @@ function problem1(filename, maxNumberFiles, callback) {
     } else {
       callback(null, data);
       for (let index = 1; index < Math.random() * maxNumberFiles + 2; index++) {
-        console.log(index);
+        //console.log(index);
         createFile(filename + index, (error, data) => {
           if (error) {
             callback(error);
