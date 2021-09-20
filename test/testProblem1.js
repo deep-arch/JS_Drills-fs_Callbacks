@@ -9,12 +9,8 @@ function fileNameGen() {
   return result;
 }
 
-let maxNumberFiles = 10;
+let maxNumberFiles = 10000;
 
-problem1(fileNameGen(), maxNumberFiles, (error, data) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(data);
-  }
-});
+problem1(fileNameGen(), maxNumberFiles)
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error));

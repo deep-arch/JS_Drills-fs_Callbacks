@@ -4,80 +4,53 @@
 //     1. Create a directory of random JSON files
 //     2. Delete those files simultaneously
 
-const fs = require("fs");
+const {
+  promises: { mkdir, writeFile, unlink, rmdir },
+} = require("fs");
 
-function problem1(filename, maxNumberFiles, callback) {
-  createDir((error, data) => {
-    if (error) {
-      callback(error);
-    } else {
-      callback(null, data);
+function problem1(filename, maxNumberFiles) {
+  return new Promise((resolve, reject) => {
+    createDir()
+    {
       for (let index = 1; index < Math.random() * maxNumberFiles + 2; index++) {
         //console.log(index);
-        createFile(filename + index, (error, data) => {
-          if (error) {
-            callback(error);
+        newFilename = filename + index;
+        createAndDeleteFile(newFilename)
+        {
+          if (newFilename) {
+            resolve("");
           } else {
-            callback(null, data);
-            deleteFile(filename + index, (error, data) => {
-              if (error) {
-                callback(error);
-              } else {
-                callback(null, data);
-                deleteDir((error, data) => {
-                  if (error) {
-                    callback(error);
-                  } else {
-                    callback(null, data);
-                  }
-                });
-              }
-            });
+            reject(error);
           }
-        });
+        }
       }
+      //resolve();
+      // deleteDir();
     }
   });
 }
 
-function createDir(callback) {
-  fs.mkdir("directory", (error) => {
-    if (error) {
-      callback(new Error("Directory already exists!"));
-    } else {
-      callback(null, "Directory created successfully!");
-    }
-  });
+function createDir() {
+  mkdir("directory")
+    .then(() => console.log("Directory created successfully!"))
+    .catch((error) => console.log(error, "Directory already exists!"));
 }
 
-function createFile(filename, callback) {
-  fs.writeFile(`./directory/${filename}.json`, "JSONdata", (error) => {
-    if (error) {
-      callback(error);
-    } else {
-      callback(null, `${filename}.json file created successfully!`);
-    }
-  });
+function createAndDeleteFile(filename) {
+  writeFile(`./directory/${filename}.json`, "JSONdata")
+    .then(() => {
+      console.log(`${filename}.json file created successfully!`);
+      unlink(`./directory/${filename}.json`)
+        .then(() => console.log(`${filename}.json file deleted successfully!`))
+        .catch((error) => console.log(error, "File not deleted!"));
+    })
+    .catch((error) => console.log(error, "File not created!"));
 }
 
-function deleteFile(filename, callback) {
-  fs.unlink(`./directory/${filename}.json`, (error) => {
-    if (error) {
-      callback(new Error("File does not exists!"));
-    } else {
-      callback(null, `${filename}.json file deleted successfully!`);
-    }
-  });
-}
-
-function deleteDir(callback) {
-  fs.rmdir("directory", function (error) {
-    if (error) {
-      return;
-    } else {
-      callback(null, "");
-    }
-  });
-}
+// function deleteDir() {
+//   rmdir("directory")
+//     .then(() => console.log(""))
+//     .catch((error) => console.log(error, "Directory not empty!"));
+// }
 
 module.exports = { problem1 };
