@@ -12,7 +12,7 @@ const {
 } = require("fs");
 
 function problem2(lipsum) {
-let filename;
+  let filename;
 
   readFile(lipsum, "utf8")
     .then((data) => writeFile("../data/upperCase.txt", data.toUpperCase()))
@@ -21,13 +21,20 @@ let filename;
       return writeFile("../data/filenames.txt", filename);
     })
     .then(() => readFile("../data/upperCase.txt", "utf8"))
-    .then((data) => writeFile("../data/lowerCaseAndSplit.txt", data.toLowerCase().split(". ").join("\n")))
+    .then((data) =>
+      writeFile(
+        "../data/lowerCaseAndSplit.txt",
+        data.toLowerCase().split(". ").join("\n")
+      )
+    )
     .then(() => {
       filename += "\nlowerCaseAndSplit.txt";
       return writeFile("../data/filenames.txt", filename);
     })
     .then(() => readFile("../data/lowerCaseAndSplit.txt", "utf8"))
-    .then((data) => writeFile("../data/sort.txt", data.split("\n").sort().join("\n")))
+    .then((data) =>
+      writeFile("../data/sort.txt", data.split("\n").sort().join("\n"))
+    )
     .then(() => {
       filename += "\nsort.txt";
       return writeFile("../data/filenames.txt", filename);
@@ -41,7 +48,7 @@ let filename;
     })
     .catch((error) => {
       console.log(error);
-    })
+    });
 }
 
-module.exports = { problem2 };
+module.exports = problem2;

@@ -10,12 +10,12 @@ const {
 
 function problem1(filename, maxNumberFiles) {
   return new Promise((resolve, reject) => {
-    createDir()
+    createDir();
     {
       for (let index = 1; index < Math.random() * maxNumberFiles + 2; index++) {
         //console.log(index);
         newFilename = filename + index;
-        createAndDeleteFile(newFilename)
+        createAndDeleteFile(newFilename);
         {
           if (newFilename) {
             resolve("");
@@ -53,4 +53,4 @@ function createAndDeleteFile(filename) {
 //     .catch((error) => console.log(error, "Directory not empty!"));
 // }
 
-module.exports = { problem1 };
+module.exports = problem1;

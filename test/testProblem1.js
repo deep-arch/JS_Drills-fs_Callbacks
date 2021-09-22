@@ -1,4 +1,4 @@
-const { problem1 } = require("../problem1");
+const problem1 = require("../problem1");
 
 function fileNameGen() {
   var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
