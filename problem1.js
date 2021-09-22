@@ -80,4 +80,4 @@ function deleteDir(callback) {
   });
 }
 
-module.exports = { problem1 };
+module.exports = problem1;

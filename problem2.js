@@ -47,7 +47,10 @@ function problem2(lipsum, callback) {
                             if (error) {
                               callback(error);
                             } else {
-                              callback(null, "Contents of filenames.txt: \n" + data);
+                              callback(
+                                null,
+                                "Contents of filenames.txt: \n" + data
+                              );
                               deleteAllNewFiles((error, data) => {
                                 if (error) {
                                   callback(error);
@@ -231,4 +234,4 @@ function deleteAllNewFiles(callback) {
   }, 2 * 1000);
 }
 
-module.exports = { problem2 };
+module.exports = problem2;
