@@ -25,10 +25,7 @@ function problem2(lipsum, callback) {
             } else {
               let tData = data
                 .toLowerCase()
-                .replace(/\. /g, ".|")
-                // .replace(/\? /g, "?|")
-                // .replace(/\! /g, "!|")
-                .split("|")
+                .split(". ")
                 .join("\n");
               writeFileLowerAndSplit(tData, (error, data) => {
                 if (error) {
